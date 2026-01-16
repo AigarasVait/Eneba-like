@@ -4,16 +4,15 @@ import (
 	"database/sql"
 	"log"
 
-	_ "github.com/microsoft/go-mssqldb"
+	_ "modernc.org/sqlite"
 )
 
 var DB *sql.DB
 
 func Connect() {
-	connString := "sqlserver://user:pass@localhost:1433?database=MyDB"
 
 	var err error
-	DB, err = sql.Open("sqlserver", connString)
+	DB, err = sql.Open("sqlite", "file:mydb.sqlite")
 	if err != nil {
 		log.Fatal("Error creating connection pool:", err)
 	}

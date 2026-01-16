@@ -2,14 +2,12 @@ package main
 
 import (
 	"backend/db"
-
-	"github.com/gin-gonic/gin"
+	"backend/router"
 )
 
 func main() {
-	db.Connect()
+	db.Init()
 
-	router := gin.Default()
-
-	router.Run(":8080")
+	r := router.SetupRouter()
+	r.Run(":8080")
 }

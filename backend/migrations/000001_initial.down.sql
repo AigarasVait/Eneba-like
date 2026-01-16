@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS game_listings;
+DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS gamestores;
