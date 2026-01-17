@@ -16,7 +16,7 @@ func NewListingRepository(db *sql.DB) *ListingRepository {
 func (lr *ListingRepository) FetchAllListings() ([]models.Listing, error) {
 	rows, err := lr.db.Query(`
 		SELECT 
-			l.id, l.name, l.price, l.favorited_count,
+			l.id, l.name, l.price, l.favorited_count, l.region,
             l.game_id,
             g.id, g.name, g.image, g.base_price,
             l.gamestore_id,
@@ -39,7 +39,7 @@ func (lr *ListingRepository) FetchAllListings() ([]models.Listing, error) {
 		var gs models.GameStore
 
 		err := rows.Scan(
-			&l.ID, &l.Name, &l.Price, &l.FavoritedCount,
+			&l.ID, &l.Name, &l.Price, &l.FavoritedCount, &l.Region,
 			&l.GameID,
 			&g.ID, &g.Name, &g.ImagePath, &g.BasePrice,
 			&l.GameStoreID,

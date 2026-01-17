@@ -5,6 +5,7 @@ type Listing struct {
 	Name           string  `json:"name"`
 	Price          float64 `json:"price"`
 	FavoritedCount int     `json:"favorited_count"`
+	Region         string  `json:"region"`
 
 	GameID int   `json:"game_id"`
 	Game   *Game `json:"game,omitempty"`
@@ -22,4 +23,7 @@ type ListingCardDTO struct {
 	GameStoreImagePath string  `json:"game_store_image"`
 	GameImagePath      string  `json:"game_image"`
 	BasePrice          float64 `json:"base_price"`
+	Region             string  `json:"region"`
+	Cashback           float64 `json:"cashback"`
+	DiscountPercent    float64 `json:"discount_percent"`
 }

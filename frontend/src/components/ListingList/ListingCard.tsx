@@ -1,6 +1,6 @@
 import React from "react";
 import "./ListingCard.css"
-import { ListingCardDTO } from "../types";
+import type { ListingCardDTO } from "../../types/ListingCardDTO";
 
 interface Props {
   listing: ListingCardDTO;
@@ -12,7 +12,7 @@ const ListingCard: React.FC<Props> = ({ listing }) => {
       <img src={listing.gameImagePath} alt={listing.name} className="cover" />
       <div className="info">
         <h3>{listing.name}</h3>
-        <p>{listing.platform} • {listing.region}</p>
+        <p>{listing.region}</p>
         <p className="price">
           <span className="original">€{listing.basePrice.toFixed(2)}</span>
           <span className="discount">-{listing.discountPercent}%</span>
