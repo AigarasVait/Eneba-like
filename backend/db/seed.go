@@ -51,9 +51,9 @@ func SeedDatabase(db *sql.DB) error {
 		image      string
 		base_price float64
 	}{
-		{"FIFA 23", "fifa23.png", 69.99},
-		{"Red Dead Redemption 2", "rdr2.png", 59.99},
-		{"Split Fiction", "splitfiction.png", 49.99},
+		{"FIFA 23", "fifa23.jpg", 69.99},
+		{"Red Dead Redemption 2", "rdr2.jpg", 59.99},
+		{"Split Fiction", "splitfiction.jpg", 49.99},
 	}
 
 	for _, game := range games {
@@ -66,28 +66,31 @@ func SeedDatabase(db *sql.DB) error {
 		}
 	}
 
-	// Seed game listings with actual discounted prices
+	// Seed game listings with actual discounted prices, regions, and favorites
 	listings := []struct {
-		name        string
-		price       float64
-		gameID      int
-		gamestoreID int
+		name           string
+		price          float64
+		gameID         int
+		gamestoreID    int
+		region         string
+		favoritedCount int
 	}{
-		{"FIFA 23", 48.99, 1, 1},               // 30% off (69.99 * 0.70)
-		{"FIFA 23", 69.99, 1, 2},               // Full price
-		{"Red Dead Redemption 2", 29.99, 2, 1}, // 50% off (59.99 * 0.50)
-		{"Red Dead Redemption 2", 44.99, 2, 3}, // 25% off (59.99 * 0.75)
-		{"Split Fiction", 49.99, 3, 1},         // Full price
-		{"Split Fiction", 42.49, 3, 2},         // 15% off (49.99 * 0.85)
+		{"FIFA 23", 48.99, 1, 1, "EUROPE", 142},
+		{"FIFA 23", 69.99, 1, 2, "GLOBAL", 87},
+		{"Red Dead Redemption 2", 29.99, 2, 1, "EUROPE", 523},
+		{"Red Dead Redemption 2", 44.99, 2, 3, "GLOBAL", 298},
+		{"Split Fiction", 49.99, 3, 1, "GLOBAL", 45},
+		{"Split Fiction", 42.49, 3, 2, "EUROPE", 76},
 	}
 
 	for _, listing := range listings {
 		_, err := tx.Exec(
 			`INSERT INTO game_listings 
-			(name, price, game_id, gamestore_id) 
-			VALUES (?, ?, ?, ?)`,
+			(name, price, game_id, gamestore_id, region, favorited_count) 
+			VALUES (?, ?, ?, ?, ?, ?)`,
 			listing.name, listing.price,
 			listing.gameID, listing.gamestoreID,
+			listing.region, listing.favoritedCount,
 		)
 		if err != nil {
 			return err

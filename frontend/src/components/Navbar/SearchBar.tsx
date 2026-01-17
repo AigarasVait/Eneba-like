@@ -1,9 +1,18 @@
-import { useState } from "react"
-import "./SearchBar.css"
-import icon from "../../assets/search-interface-symbol.png"
+import { useState } from "react";
+import "./SearchBar.css";
+import icon from "../../assets/search-interface-symbol.png";
 
-export default function SearchBar() {
-  const [query, setQuery] = useState("")
+interface Props {
+  onSearch: (value: string) => void;
+}
+
+export default function SearchBar({ onSearch }: Props) {
+  const [query, setQuery] = useState("");
+
+  const handleChange = (value: string) => {
+    setQuery(value);
+    onSearch(value);
+  };
 
   return (
     <div className="search-bar">
@@ -12,13 +21,14 @@ export default function SearchBar() {
         type="text"
         placeholder="Search for games"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
       />
       {query && (
-        <button className="clear" onClick={() => setQuery("")}>
+        <button className="clear" onClick={() => handleChange("")}>
           ✖
         </button>
       )}
     </div>
-  )
+  );
 }
+
