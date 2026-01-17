@@ -21,6 +21,6 @@ func Connect() {
 	if err != nil {
 		log.Fatal("Cannot connect to database:", err)
 	}
-
-	log.Println("Connected to SQL Server")
+	DB.Exec("PRAGMA journal_mode=WAL;")
+	log.Println("Connected to SQLite database")
 }
