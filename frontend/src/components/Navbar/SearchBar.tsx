@@ -11,18 +11,26 @@ export default function SearchBar({ onSearch }: Props) {
 
   const handleChange = (value: string) => {
     setQuery(value);
-    onSearch(value);
+  };
+
+  const handleSubmit = () => {
+    onSearch(query);
   };
 
   return (
     <div className="search-bar">
-      <img className="icon" src={icon} alt="Logo" />
+      <img className="icon" src={icon} alt="Logo" onClick={handleSubmit}></img>
+
       <input
         type="text"
         placeholder="Search for games"
         value={query}
         onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") handleSubmit();
+        }}
       />
+
       {query && (
         <button className="clear" onClick={() => handleChange("")}>
           ✖
@@ -31,4 +39,3 @@ export default function SearchBar({ onSearch }: Props) {
     </div>
   );
 }
-

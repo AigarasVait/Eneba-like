@@ -2,6 +2,7 @@ import React from "react";
 import "./ListingCard.css"
 import type { ListingCardDTO } from "../../types/ListingCardDTO";
 import { API_BASE_URL } from "../../constants/api";
+import heart from "../../assets/heart.png"
 
 interface Props {
   listing: ListingCardDTO;
@@ -10,21 +11,50 @@ interface Props {
 const ListingCard: React.FC<Props> = ({ listing }) => {
   return (
     <div className="card">
-      <img 
+      <div className="cover-wrapper">
+        <img 
         src={listing.gameImagePath ? `${API_BASE_URL}/images/${listing.gameImagePath}` : ''} 
         alt={listing.name} 
         className="cover" 
-      />
+        />
+        <div className="overlay">
+          <img 
+          src={listing.gameStoreImagePath ? `${API_BASE_URL}/images/${listing.gameStoreImagePath}` : ''} 
+          alt={listing.gameStoreName} 
+          className="store-cover" 
+          />
+        ️  {listing.gameStoreName} 
+        </div>
+      </div>
       <div className="info">
-        <h3>{listing.name}</h3>
-        <p>{listing.region}</p>
-        <p className="price">
-          <span className="original">€{listing.basePrice?.toFixed(2) ?? '0.00'}</span>
-          <span className="discount">-{listing.discountPercent ?? 0}%</span>
-          <span className="final">€{listing.price?.toFixed(2) ?? '0.00'}</span>
-        </p>
-        <p className="cashback">Cashback: €{listing.cashback?.toFixed(2) ?? '0.00'}</p>
-        <p className="likes">❤️ {listing.favoritedCount ?? 0}</p>
+        <div className="top">
+          <p className="title">{listing.name}</p>
+          <p className="region">{listing.region}</p>
+        </div>
+        
+        <div className="bottom">
+          <p className="price">
+            <span className="original">From</span>
+            {Number(listing.basePrice) !== Number(listing.price) && (
+              <>
+                <span className="original-number">
+                  €{listing.basePrice?.toFixed(2)}
+                </span>
+
+                <span className="discount">
+                  -{listing.discountPercent?.toFixed(0) ?? 0}%
+                </span>
+              </>
+            )}
+
+          </p>
+          <p className="final">€{listing.price?.toFixed(2) ?? '0.00'}</p>
+          <p className="cashback">Cashback: €{listing.cashback?.toFixed(2) ?? '0.00'}</p>
+          <p className="likes"> 
+            <img className="like-icon" src={heart} alt="Likes" />
+            <span>{listing.favoritedCount ?? 0}</span>
+          </p>
+        </div>
       </div>
     </div>
   );

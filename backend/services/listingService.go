@@ -13,8 +13,8 @@ func NewListingService(repo *repositories.ListingRepository) *ListingService {
 	return &ListingService{repo: repo}
 }
 
-func (ls *ListingService) GetAllListings() ([]models.ListingCardDTO, error) {
-	listings, err := ls.repo.FetchAllListings()
+func (ls *ListingService) GetAllListings(search string) ([]models.ListingCardDTO, error) {
+	listings, err := ls.repo.FetchListings(search)
 
 	if err != nil {
 		return nil, err
