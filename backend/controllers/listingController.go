@@ -13,11 +13,12 @@ func NewListingController(service *services.ListingService) *ListingController {
 }
 
 func (lc *ListingController) ListListings(c *gin.Context) {
-	listings, err := lc.Service.GetAllListings()
+	search := c.Query("search")
+	listingDTOs, err := lc.Service.GetAllListings(search)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, listings)
+	c.JSON(200, listingDTOs)
 }

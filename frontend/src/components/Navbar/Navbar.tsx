@@ -6,12 +6,16 @@ import cart from "../../assets/shopping-cart.png"
 import user from "../../assets/user.svg"
 import flag from "../../assets/lithuania.svg"
 
-export default function Navbar() {
+interface NavbarProps { 
+  onSearch: (value: string) => void; 
+}
+
+export default function Navbar({ onSearch }: NavbarProps) {
   return (
     <nav className="navbar">
       <div className="container">
         <img className="logo" src={logo} alt="Logo" />
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
         <div className="container">
           <img className="flag" src={flag} alt="flag" />
           <span>English EU | EUR</span>
