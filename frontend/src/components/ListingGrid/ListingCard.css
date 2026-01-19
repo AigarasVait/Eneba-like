@@ -1,5 +1,5 @@
 .card {
-  border: 2px solid hsla(164, 70%, 64%, 0.824);
+  border: 2px solid #63e3c1d2;
   overflow: hidden;
   background: #1F0A4D;
   width: 265px;
@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.overlay {
+.store-overlay {
   position: absolute;
   top: 94%;         
   left: 0;
@@ -36,8 +36,24 @@
   backdrop-filter: blur(6px);
 }
 
+.cashback-overlay {
+  position: absolute;
+  top: 82%;         
+  left: 0;
+  width: 37%;
+  height: 9%;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+  background: #63e3c1; 
+  color: #1F0A4D;
+  font-size: 15px;
+  font-weight: 700;
+}
+
 .store-cover {
   height: 75%;
+  margin-right: 0.3rem;
 }
 
 
@@ -90,11 +106,6 @@
   font-weight: bold;
 }
 
-.cashback {
-  font-weight: bold;
-  color: #7BD923;
-}
-
 .likes {
   color: #cacaca;
 }
@@ -104,4 +115,9 @@
   height: 1rem;
   margin-right: 0.3rem;
   vertical-align: middle;
+}
+
+.cashback {
+  height: 1rem;
+  background: hsla(164, 70%, 64%); 
 }

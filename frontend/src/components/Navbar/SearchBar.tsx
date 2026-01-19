@@ -17,6 +17,11 @@ export default function SearchBar({ onSearch }: Props) {
     onSearch(query);
   };
 
+  const handleClear = () => {
+    onSearch("");
+    setQuery("");
+  };
+
   return (
     <div className="search-bar">
       <img className="icon" src={icon} alt="Logo" onClick={handleSubmit}></img>
@@ -32,7 +37,7 @@ export default function SearchBar({ onSearch }: Props) {
       />
 
       {query && (
-        <button className="clear" onClick={() => handleChange("")}>
+        <button className="clear" onClick={() => handleClear()}>
           ✖
         </button>
       )}
