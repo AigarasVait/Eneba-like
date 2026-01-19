@@ -17,13 +17,16 @@ const ListingCard: React.FC<Props> = ({ listing }) => {
         alt={listing.name} 
         className="cover" 
         />
-        <div className="overlay">
+        <div className="store-overlay">
           <img 
           src={listing.gameStoreImagePath ? `${API_BASE_URL}/images/${listing.gameStoreImagePath}` : ''} 
           alt={listing.gameStoreName} 
           className="store-cover" 
           />
-        ️  {listing.gameStoreName} 
+        ️  <span>{listing.gameStoreName}</span>
+        </div>
+        <div className="cashback-overlay">
+          <span>Cashback</span>
         </div>
       </div>
       <div className="info">
@@ -49,7 +52,7 @@ const ListingCard: React.FC<Props> = ({ listing }) => {
 
           </p>
           <p className="final">€{listing.price?.toFixed(2) ?? '0.00'}</p>
-          <p className="cashback">Cashback: €{listing.cashback?.toFixed(2) ?? '0.00'}</p>
+          <p className="discount">Cashback: €{listing.cashback?.toFixed(2) ?? '0.00'}</p>
           <p className="likes"> 
             <img className="like-icon" src={heart} alt="Likes" />
             <span>{listing.favoritedCount ?? 0}</span>
